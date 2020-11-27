@@ -7,4 +7,14 @@ export const fetchPosts = () => async dispatch => {
     type: 'FETCH_POSTS',
     payload: response.data
   });
-}
+};
+
+export const fetchUser = (id) => async dispatch => {
+  const response = await jsonPlaceHolder.get(`/user/${id}`);
+
+  dispatch({
+    type: 'FETCH_USER',
+    payload: response.data
+  });
+};
+
