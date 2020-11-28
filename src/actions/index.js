@@ -1,11 +1,14 @@
-import { map, uniq } from "lodash";
+import _ from "lodash";
 import jsonPlaceHolder from "../apis/jsonPlaceHolder"
 
 export const fetchPostsAndUsers = () => async (dispatch, getState) => {
   await dispatch(fetchPosts())
 
-  const userIds = uniq(map(getState().posts, 'userId'));
-  userIds.forEach(u => dispatch(fetchUser(u)));
+  _.chain(getState().posts)
+    .map('userId')
+    .uniq()
+    .forEach(u => dispatch(fetchUser(u)))
+    .value()
 };
 
 
